@@ -10,7 +10,11 @@ const myFormat = printf(({ level, message, timestamp }) => {
 const logger = winston.createLogger({
 	level: 'debug',
 	format: combine(timestamp(), myFormat),
-	transports: [new winston.transports.Console()],
+
+	transports: [
+		new winston.transports.Console(),
+		new winston.transports.File({ filename: 'error.log', dirname: 'logs' }),
+	],
 });
 
 export default logger;
